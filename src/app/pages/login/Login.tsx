@@ -1,9 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const loginButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     console.log("A página foi carregada!");
@@ -18,8 +26,7 @@ export const Login = () => {
   }, [email.length]);
 
   const handleLogin = useCallback(() => {
-    console.log(email);
-    console.log(password);
+    console.log("Email: " + email + " Password: " + password);
   }, [email, password]);
 
   return (
@@ -38,9 +45,12 @@ export const Login = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) =>
+              e.key === "Enter" ? loginButtonRef.current?.click() : undefined
+            }
           />
         </label>
-        <button type="button" onClick={handleLogin}>
+        <button type="button" onClick={handleLogin} ref={loginButtonRef}>
           Login
         </button>
       </form>
