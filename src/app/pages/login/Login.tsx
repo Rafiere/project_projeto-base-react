@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
@@ -9,6 +9,14 @@ export const Login = () => {
     console.log(email);
     console.log(password);
   };
+
+  useEffect(() => {
+    console.log("A página foi carregada!");
+  }, []);
+
+  useEffect(() => {
+    console.log("Email: " + email + " Password: " + password);
+  }, [email, password]);
 
   return (
     <div>
