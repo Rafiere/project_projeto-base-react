@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
@@ -17,6 +17,10 @@ export const Login = () => {
   useEffect(() => {
     console.log("Email: " + email + " Password: " + password);
   }, [email, password]);
+
+  const emailLength = useMemo(() => {
+    return email.length * 1000;
+  }, [email.length]);
 
   return (
     <div>
