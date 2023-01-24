@@ -1,14 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    console.log(email);
-    console.log(password);
-  };
 
   useEffect(() => {
     console.log("A página foi carregada!");
@@ -21,6 +16,11 @@ export const Login = () => {
   const emailLength = useMemo(() => {
     return email.length * 1000;
   }, [email.length]);
+
+  const handleLogin = useCallback(() => {
+    console.log(email);
+    console.log(password);
+  }, [email, password]);
 
   return (
     <div>
