@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
+import LoginButton from "./components/LoginButton";
 import LoginInput from "./components/LoginInput";
 
 const ComponentizedLogin = () => {
@@ -11,6 +12,10 @@ const ComponentizedLogin = () => {
   const handleLogin = useCallback(() => {
     console.log("Email: " + email + " - Password: " + password);
   }, [email, password]);
+
+  const handleSignUp = useCallback(() => {
+    console.log("Cadastrando...");
+  }, []);
 
   return (
     <div>
@@ -29,9 +34,16 @@ const ComponentizedLogin = () => {
           ref={passwordInputRef}
           onPressEnter={() => sendFormButtonRef.current?.click()}
         />
-        <button type="button" onClick={handleLogin} ref={sendFormButtonRef}>
-          Enviar
-        </button>
+        <LoginButton
+          type="button"
+          onClick={handleLogin}
+          ref={sendFormButtonRef}
+        >
+          Login
+        </LoginButton>
+        <LoginButton type="button" onClick={handleSignUp}>
+          Sign Up
+        </LoginButton>
       </form>
     </div>
   );
