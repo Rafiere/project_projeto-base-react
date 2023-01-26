@@ -1,8 +1,11 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoggedUserContext } from "../../shared/contexts/LoggedUser";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
+
+  const loggedUserContext = useContext(LoggedUserContext);
 
   const handleClick = () => {
     navigate("/login");
@@ -14,6 +17,9 @@ export const Dashboard = () => {
   return (
     <div>
       <h1>Página de Dashboard</h1>
+
+      <h2>Usuário Logado: {loggedUserContext.username}</h2>
+
       <button onClick={handleClick}>Ir para Login</button>
 
       <p>Contador: {counterRef.current}</p>
