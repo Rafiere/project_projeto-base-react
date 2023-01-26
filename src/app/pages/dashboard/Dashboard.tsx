@@ -26,6 +26,7 @@ export const Dashboard = () => {
       <p>Contador: {counterRef.current}</p>
       <button onClick={() => counterRef.current++}>Somar</button>
       <button onClick={() => console.log(counterRef)}>Gerar Log</button>
+      <button onClick={() => loggedUserContext.logout()}>Logout</button>
     </div>
   );
 };
