@@ -1,11 +1,12 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoggedUserContext } from "../../shared/contexts/LoggedUser";
+import {} from "../../shared/contexts/LoggedUser";
+import { useLoggedUser } from "../../shared/hooks/UseLoggedUser";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
 
-  const loggedUserContext = useContext(LoggedUserContext);
+  const loggedUserContext = useLoggedUser();
 
   const handleClick = () => {
     navigate("/login");
