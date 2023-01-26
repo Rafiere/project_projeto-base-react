@@ -1,4 +1,4 @@
-import React, { createContext, useCallback } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 
 interface LoggedUserContextData {
   username: string;
@@ -16,10 +16,18 @@ export const LoggedUserProvider = ({ children }: LoggedUserContextProps) => {
     console.log("Logout...");
   }, []);
 
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setUsername("Administrador");
+    }, 1000);
+  });
+
   return (
     <LoggedUserContext.Provider
       value={{
-        username: "admin",
+        username: username,
         logout: handleLogout,
       }}
     >
