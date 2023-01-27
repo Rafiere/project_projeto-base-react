@@ -1,0 +1,14 @@
+{
+  "city": [
+    {
+      "id": 1,
+      "name": "Barcelona",
+      "stars": 5
+    },
+    {
+      "id": 2,
+      "name": "Madrid",
+      "stars": 5
+    }
+  ]
+}
