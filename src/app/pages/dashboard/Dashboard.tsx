@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {} from "../../shared/contexts/LoggedUser";
 import { useLoggedUser } from "../../shared/hooks/UseLoggedUser";
+import CheckboxName, { CheckboxNameProps } from "./components/CheckboxName";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -10,6 +11,11 @@ export const Dashboard = () => {
 
   const [inputTable, setInputTable] = useState("");
   const [listNames, setListNames] = useState<string[]>([]);
+
+  const [inputCheckboxName, setInputCheckboxName] = useState<string>("");
+  const [listCheckboxName, setListCheckboxName] = useState<CheckboxNameProps[]>(
+    []
+  );
 
   const handleClick = () => {
     navigate("/login");
@@ -28,6 +34,26 @@ export const Dashboard = () => {
       }
     },
     [inputTable]
+  );
+
+  const handleEnterCity = useCallback<
+    React.KeyboardEventHandler<HTMLInputElement>
+  >(
+    (e) => {
+      /* applying fail fast concept. */
+      if (e.key !== "Enter") {
+        return;
+      }
+
+      setListCheckboxName((oldList) => {
+        const newItem: CheckboxNameProps = {
+          name: inputCheckboxName,
+        };
+
+        return [...oldList, newItem];
+      });
+    },
+    [inputCheckboxName]
   );
 
   /* O valor será atualizado, o estado, não, pois estamos realizando uma modificação direta. */
@@ -56,6 +82,22 @@ export const Dashboard = () => {
           <li key={name}>
             {index + 1 + " - "} {name}
           </li>
+        );
+      })}
+
+      <label>
+        <span>Insert a City and Press Enter</span>
+        <input
+          onKeyDown={handleEnterCity}
+          value={inputCheckboxName}
+          onChange={(e) => setInputCheckboxName(e.target.value)}
+          placeholder={"Insert a city..."}
+        />
+      </label>
+
+      {listCheckboxName.map((checkbox) => {
+        return (
+          <CheckboxName name={checkbox.name} key={checkbox.name}></CheckboxName>
         );
       })}
 
